@@ -44,6 +44,7 @@ const List<HealthDataType> dataTypesIOS = [
   HealthDataType.WATER,
   HealthDataType.EXERCISE_TIME,
   HealthDataType.WORKOUT,
+  HealthDataType.WORKOUT_ROUTE,
   HealthDataType.HEADACHE_NOT_PRESENT,
   HealthDataType.HEADACHE_MILD,
   HealthDataType.HEADACHE_MODERATE,
@@ -53,13 +54,13 @@ const List<HealthDataType> dataTypesIOS = [
 
   // note that a phone cannot write these ECG-based types - only read them
   HealthDataType.ELECTROCARDIOGRAM,
+
   // HealthDataType.HIGH_HEART_RATE_EVENT,
   // HealthDataType.IRREGULAR_HEART_RATE_EVENT,
   // HealthDataType.LOW_HEART_RATE_EVENT,
   // HealthDataType.RESTING_HEART_RATE,
   // HealthDataType.WALKING_HEART_RATE,
   // HealthDataType.ATRIAL_FIBRILLATION_BURDEN,
-
   HealthDataType.NUTRITION,
   HealthDataType.GENDER,
   HealthDataType.BLOOD_TYPE,
@@ -101,6 +102,7 @@ const List<HealthDataType> dataTypesAndroid = [
   HealthDataType.SLEEP_SESSION,
   HealthDataType.WATER,
   HealthDataType.WORKOUT,
+  HealthDataType.WORKOUT_ROUTE,
   HealthDataType.RESTING_HEART_RATE,
   HealthDataType.FLIGHTS_CLIMBED,
   HealthDataType.NUTRITION,
