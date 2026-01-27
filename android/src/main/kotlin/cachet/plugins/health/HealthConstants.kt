@@ -37,6 +37,7 @@ object HealthConstants {
     const val WEIGHT = "WEIGHT"
     const val TOTAL_CALORIES_BURNED = "TOTAL_CALORIES_BURNED"
     const val SPEED = "SPEED"
+    const val ACTIVITY_INTENSITY = "ACTIVITY_INTENSITY"
 
     // Meal types
     const val BREAKFAST = "BREAKFAST"
@@ -60,6 +61,7 @@ object HealthConstants {
 
     // Activity type
     const val WORKOUT = "WORKOUT"
+    const val WORKOUT_ROUTE = "WORKOUT_ROUTE"
 
     /**
      * Maps Flutter health data type strings to their corresponding Health Connect Record classes.
@@ -103,6 +105,7 @@ object HealthConstants {
         TOTAL_CALORIES_BURNED to TotalCaloriesBurnedRecord::class,
         MENSTRUATION_FLOW to MenstruationFlowRecord::class,
         SPEED to SpeedRecord::class,
+        ACTIVITY_INTENSITY to ActivityIntensityRecord::class,
     )
     
     /**
@@ -123,7 +126,8 @@ object HealthConstants {
         SLEEP_ASLEEP to SleepSessionRecord.SLEEP_DURATION_TOTAL,
         SLEEP_AWAKE to SleepSessionRecord.SLEEP_DURATION_TOTAL,
         SLEEP_IN_BED to SleepSessionRecord.SLEEP_DURATION_TOTAL,
-        TOTAL_CALORIES_BURNED to TotalCaloriesBurnedRecord.ENERGY_TOTAL
+        TOTAL_CALORIES_BURNED to TotalCaloriesBurnedRecord.ENERGY_TOTAL,
+        ACTIVITY_INTENSITY to ActivityIntensityRecord.INTENSITY_MINUTES_TOTAL,
     )
 
     /**
@@ -238,4 +242,7 @@ object HealthConstants {
         "YOGA" to ExerciseSessionRecord.EXERCISE_TYPE_YOGA,
         "OTHER" to ExerciseSessionRecord.EXERCISE_TYPE_OTHER_WORKOUT,
     )
+
+    val workoutTypeReverseMap: Map<Int, String> =
+        workoutTypeMap.entries.associate { (key, value) -> value to key }
 }
