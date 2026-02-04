@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Dart Format Check
+name: Format Check
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ on:
 
 
 jobs:
-  format:
+  format-dart-kotlin:
     runs-on: ubuntu-latest
 
     steps:
@@ -41,8 +41,23 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Verify formatting
-        run: dart format --output=none --set-exit-if-changed .
+      - name: Format Dart
+        run: |
+          dart format lib test example
+          git diff --exit-code
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Format Kotlin
+        run: |
+          curl -sSLo ktlint https://github.com/pinterest/ktlint/releases/latest/download/ktlint
+          chmod +x ktlint
+          ./ktlint -F android/src/main/kotlin
+          git diff --exit-code
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: Analyze project source
@@ -53,3 +68,15 @@ jobs:
       # want to change this to 'flutter test'.
       - name: Run tests
         run: flutter test
+
+  format-swift:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SwiftFormat
+        run: brew install swiftformat
+      - name: Format Swift
+        run: |
+          swiftformat ios/Classes example/ios/Runner example/ios/RunnerTests
+          git diff --exit-code
