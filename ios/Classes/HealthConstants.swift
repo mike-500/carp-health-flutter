@@ -26,6 +26,7 @@ enum HealthConstants {
     static let LEAN_BODY_MASS = "LEAN_BODY_MASS"
     static let BODY_MASS_INDEX = "BODY_MASS_INDEX"
     static let BODY_TEMPERATURE = "BODY_TEMPERATURE"
+    static let WRIST_TEMPERATURE = "WRIST_TEMPERATURE"
     
     // Nutrition
     static let DIETARY_CARBS_CONSUMED = "DIETARY_CARBS_CONSUMED"
