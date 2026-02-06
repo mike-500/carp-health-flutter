@@ -105,7 +105,7 @@ enum HealthDataType {
   MENSTRUATION_FLOW,
   WATER_TEMPERATURE,
   UNDERWATER_DEPTH,
-  WRIST_TEMPERATURE,
+  SLEEP_WRIST_TEMPERATURE,
 
   // Heart Rate events (specific to Apple Watch)
   HIGH_HEART_RATE_EVENT,
