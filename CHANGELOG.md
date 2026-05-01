@@ -1,3 +1,7 @@
+## Unreleased
+
+* iOS: Add Swift Package Manager support - issue [#480](https://github.com/carp-dk/carp-health-flutter/issues/480). The plugin can now be consumed via SPM in addition to CocoaPods. iOS sources have been moved to `ios/health/Sources/health/` and the small Objective-C registration shim has been replaced with a Swift `HealthPlugin` class annotated `@objc(HealthPlugin)` so the existing `pluginClass: HealthPlugin` continues to resolve for both build systems.
+
 ## 13.3.1
 
 * iOS: Fix issues with app crashing on iOS 15
