@@ -489,7 +489,7 @@ class Health {
 
   /// Write health data.
   ///
-  /// Returns created HealthDataPoint UUID if successful, null otherwise.
+  /// Returns true if successful, false otherwise.
   ///
   /// Parameters:
   ///  * [value] - the health data's value in double
@@ -506,7 +506,7 @@ class Health {
   ///
   /// Values for Sleep and Headache are ignored and will be automatically assigned
   /// the default value.
-  Future<String?> writeHealthData({
+  Future<bool> writeHealthData({
     required double value,
     HealthDataUnit? unit,
     required HealthDataType type,
@@ -579,10 +579,8 @@ class Health {
       'clientRecordId': clientRecordId,
       'clientRecordVersion': clientRecordVersion,
     };
-
-    String uuid = '${await _channel.invokeMethod('writeData', args)}';
-
-    return uuid;
+    bool? success = await _channel.invokeMethod('writeData', args);
+    return success ?? false;
   }
 
   /// Deletes all records of the given [type] for a given period of time.
@@ -746,15 +744,13 @@ class Health {
     bool? success;
 
     if (Platform.isIOS) {
-      final healthPointUUID = await writeHealthData(
+      success = await writeHealthData(
         value: saturation,
         type: HealthDataType.BLOOD_OXYGEN,
         startTime: startTime,
         endTime: endTime,
         recordingMethod: recordingMethod,
       );
-
-      success = healthPointUUID != null;
     } else if (Platform.isAndroid) {
       Map<String, dynamic> args = {
         'value': saturation,
@@ -763,9 +759,7 @@ class Health {
         'dataTypeKey': HealthDataType.BLOOD_OXYGEN.name,
         'recordingMethod': recordingMethod.toInt(),
       };
-      // Check if UUID is not empty
-      success =
-          '${await _channel.invokeMethod('writeBloodOxygen', args)}'.isNotEmpty;
+      success = await _channel.invokeMethod('writeBloodOxygen', args);
     }
     return success ?? false;
   }
@@ -1489,7 +1483,7 @@ class Health {
 
   /// Write workout data to Apple Health or Google Health Connect.
   ///
-  /// Returns created HealthDataPoint UUID if the workout data was successfully added, null otherwise.
+  /// Returns true if the workout data was successfully added.
   ///
   /// Parameters:
   ///  - [activityType] The type of activity performed.
@@ -1504,7 +1498,7 @@ class Health {
   ///  - [title] The title of the workout.
   ///    *ONLY FOR HEALTH CONNECT* Default value is the [activityType], e.g. "STRENGTH_TRAINING".
   ///  - [recordingMethod] The recording method of the data point, automatic by default (on iOS this can only be automatic or manual).
-  Future<String?> writeWorkoutData({
+  Future<bool> writeWorkoutData({
     required HealthWorkoutActivityType activityType,
     required DateTime start,
     required DateTime end,
@@ -1547,10 +1541,7 @@ class Health {
       'title': title,
       'recordingMethod': recordingMethod.toInt(),
     };
-
-    String uuid = '${await _channel.invokeMethod('writeWorkoutData', args)}';
-
-    return uuid;
+    return await _channel.invokeMethod('writeWorkoutData', args) == true;
   }
 
   /// Check if the given [HealthWorkoutActivityType] is supported on the iOS platform
