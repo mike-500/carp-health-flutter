@@ -1,3 +1,7 @@
+## 13.3.2
+
+* Bump `carp_serializable` constraint to `^3.0.0`
+
 ## 13.3.1
 
 * iOS: Fix issues with app crashing on iOS 15
